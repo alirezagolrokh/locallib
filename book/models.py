@@ -6,6 +6,9 @@ class Genre(models.Model):
     name = models.CharField(max_length=100,
                             help_text='Enter a book genre(e.g. Science fiction, Romance)'
                         )
+    
+    def __str__(self):
+        return self.name
 
 
 class Book(models.Model):
@@ -13,7 +16,7 @@ class Book(models.Model):
     summary = models.TextField(max_length=1000, 
                                 help_text='Enter a brief discription of this book'
                             )
-    isbn = models.CharField(max_length=13, help_text='13 characters')
+    isbn = models.CharField(max_length=13)
     genre = models.ManyToManyField(Genre, help_text = 'select a genre of this book')
     author = models.ForeignKey('Author',
                                 help_text = 'Enter author',
@@ -57,4 +60,4 @@ class BookInstance(models.Model):
 
 
     def __str__(self):
-        return '{} ({})'.format(self.id, self.book.title)
+        return '{} ({})'.format(self.id, self.book.title)   
